@@ -36,6 +36,8 @@
 #include <pthread.h>
 #include <time.h>
 
+#include <ucontext.h>
+
 #include "lthread_poller.h"
 #include "queue.h"
 #include "tree.h"
@@ -58,17 +60,7 @@ TAILQ_HEAD(lthread_q, lthread);
 typedef void (*lthread_func)(void *);
 
 struct cpu_ctx {
-    void     *esp;
-    void     *ebp;
-    void     *eip;
-    void     *edi;
-    void     *esi;
-    void     *ebx;
-    void     *r1;
-    void     *r2;
-    void     *r3;
-    void     *r4;
-    void     *r5;
+    ucontext_t uctx;
 };
 
 enum lthread_event {
